@@ -1,0 +1,190 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif; /* Use a clean, modern font */
+}
+
+
+/* Dark Mode Palette */
+:root {
+    --background-color: #121212; /* Very dark background */
+    --secondary-background-color: #1E1E1E; /* Lighter dark background for contrast */
+    --primary-text-color: #E0E0E0; /* Off-white text for readability */
+    --secondary-text-color: #B3B3B3; /* Subtle gray for secondary text */
+    --accent-color: #00FF9D; /* Neon green/cyan for buttons and links */
+    --button-bg-color: #333333; /* Dark button background */
+    --button-text-color: #FFFFFF; /* Button text in white */
+    --border-color: #2C2C2C; /* Darker borders and shadows */
+}
+
+
+/* Style the body to center content and add background */
+html, body {
+    height: 100%; /* Ensure the full height is taken */
+    background-color: var(--background-color); /* Use the background color variable */
+    color: #E0E0E0; /* Light text color */
+}
+
+/* Default to Dark Mode */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+    --background-color: #121212; /* Dark background color */
+    --secondary-background-color: #1E1E1E; /* Lighter dark background for contrast */
+    --primary-text-color: #FFFFFF; /* White text color */
+    --secondary-text-color: #B3B3B3; /* Light gray text */
+    --accent-color: #1DB954; /* Accent color */
+    --button-text-color: #000000; /* Button text color */
+    --border-color: #333333; /* Darker border color */
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+/* Dark Mode */
+body.dark-mode {
+    --background-color: #121212; /* Dark background color */
+    --secondary-background-color: #1E1E1E; /* Lighter dark background for contrast */
+    --primary-text-color: #FFFFFF; /* White text color */
+    --secondary-text-color: #B3B3B3; /* Light gray text */
+    --accent-color: #1DB954; /* Accent color */
+    --button-text-color: #000000; /* Button text color */
+    --border-color: #333333; /* Darker border color */
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+/* Light Mode */
+body.light-mode {
+    --background-color: #FFFFFF; /* Light background color */
+    --secondary-background-color: #F5F5F5; /* Light gray background for contrast */
+    --secondary-background-color: #F5F5F5; /* Lighter dark background for contrast */
+    --primary-text-color: #121212; /* Dark text color */
+    --secondary-text-color: #121212; /* Medium gray text */
+    --accent-color: #1DB954; /* Accent color */
+    --button-text-color: #FFFFFF; /* Button text color */
+    --border-color: #CCCCCC; /* Border color */
+    background-color: var(--background-color);
+    color: var(--primary-text-color);
+}
+
+/* Main title (h1) styling */
+h1 {
+    color: #333; /* Dark gray text */
+    font-size: 2.5rem; /* Large font size */
+    margin-bottom: 20px; /* Space below the title */
+    text-align: center;
+}
+
+/* Dropdown and input field container */
+label, select, input {
+    font-size: 1rem; /* Make text legible */
+    margin-bottom: 15px; /* Space between elements */
+    width: 100%;
+    max-width: 400px; /* Set max width for large screens */
+    display: block;
+    text-align: center;
+    color: var(--primary-text-color); /* Set text color based on the theme */
+    background-color: var(--secondary-background-color); /* Set background color based on the theme */
+    border: 1px solid var(--border-color); /* Border color based on the theme */
+    border-radius: 5px; /* Rounded corners for input/select */
+}
+
+/* Input field styling */
+input[type="text"] {
+    padding: 10px; /* Space inside the input field */
+    border: 1px solid var(--border-color); /* Border color based on the theme */
+    border-radius: 5px; /* Rounded corners */
+    width: 100%;
+    max-width: 400px;
+    font-size: 1rem;
+    margin-bottom: 5px; /* Space below the input */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+}
+
+/* Button styling */
+button {
+    background-color: var(--accent-color); /* Accent color for button background */
+    color: var(--button-text-color); /* Button text color */
+    border: 1px solid var(--border-color); /* Border color */
+    padding: 10px 15px; /* Space inside the button */
+    font-size: 1rem; /* Font size */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease; /* Smooth background change */
+    margin: 10px; /* Space between buttons */
+    display: block; /* Ensure proper spacing */
+}
+
+/* Button hover effect */
+button:hover {
+    background-color: var(--accent-color); /* Darken the accent color on hover */
+}
+
+/* QR Code container */
+#qrcode {
+    margin-top: 5px; /* Space above the QR code */
+    text-align: center; /* Center-align QR code */
+    margin-bottom: 5px;
+}
+
+/* Style for the dropdown (select element) */
+select {
+    padding: 10px;
+    border: 1px solid var(--border-color); /* Border color based on theme */
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+/* Style for the label */
+label {
+    font-size: 1rem;
+    color: var(--secondary-text-color); /* Text color based on theme */
+    font-weight: bold;
+    text-align: center;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Responsive styling */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2rem; /* Adjust title size for small screens */
+    }
+
+    input, select, button {
+        width: 100%; /* Ensure full width on small screens */
+        max-width: 300px;
+    }
+}
+
+#dispmodeBtn {
+    position: fixed;        /* Fix the button to the viewport */
+    bottom: 20px;           /* Distance from the bottom */
+    right: 20px;            /* Distance from the right */
+    background-color: var(--accent-color); /* Background color of the button */
+    border: none;           /* Remove default border */
+    padding: 10px;          /* Space around the content to make it round */
+    border-radius: 50%;     /* Make the background circular */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: Add a subtle shadow */
+    cursor: pointer;        /* Change cursor to pointer */
+    display: flex;          /* Center the image inside */
+    justify-content: center;/* Horizontally center content */
+    align-items: center;    /* Vertically center content */
+}
+
+#dispmodeBtn img {
+    width: 24px;            /* Adjust size of the image */
+    height: 24px;           /* Keep image proportional */
+}
+
+#dispmodeImage:hover {
+    transform: scale(1.1); /* Slightly enlarge image on hover */
+}
