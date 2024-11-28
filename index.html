@@ -1,0 +1,152 @@
+<!-- "lang="en"" Helps Search engines and sets default language for elements-->
+<html lang="en">
+  <!--  -->
+  <head>
+    <!-- Uses standard character sets most keyboards will understand-->
+    <meta charset="UTF-8" />
+
+    <!-- Auto sizes screen across devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Sets Title for Tab in browser-->
+    <title>QR Code Generator</title>
+
+    <!-- Set Favicon image(used for TAB Logo)-->
+    <link rel="icon" type="image/png" href="/assets/favicon.png" />
+
+    <!-- Link to external CSS file(Changes the way the HTML looks) -->
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+
+  <body>
+    <h1>QR Code Generator</h1>
+
+    <!-- Dropdown to select the QR Code type -->
+    <select id="typeSelect">
+      <option value="url">URL</option>
+      <option value="text">Text</option>
+    </select>
+
+    <!-- Input box for URL or Text -->
+    <input
+      type="text"
+      id="inputField"
+      placeholder="Enter URL"
+      title="Enter a valid URL"
+    />
+
+    <!-- Creates clickable button to create QR Code -->
+    <button id="generateBtn">Generate QR Code</button>
+
+    <!-- Display QR Code once generated -->
+    <div id="qrcode"></div>
+
+    <!-- Button to download QR Code -->
+    <button id="downloadBtn" style="display: none">Download QR Code</button>
+
+    <!-- display mode button -->
+    <button id="dispmodeBtn">
+      <img id="dispmodeImage" src="/night-mode.png" alt="Toggle Display Mode" />
+    </button>
+
+    <!-- Include the QR Code library -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+
+    <!-- Your custom script -->
+    <script>
+      // Function to check if the URL is valid
+      function isValidUrl(url) {
+        const pattern = /^(https?:\/\/)[^\s$.?#].[^\s]*$/ // Regular expression to check URL validity
+        return pattern.test(url)
+      }
+
+      //Extract domain from URL (characters between www. and .com)
+      function extractDomain(url) {
+        const match = url.match(/www\.(.*?)\.com/)
+        return match ? match[1] : "qr_code"
+      }
+
+      // Dynamically update input placeholder and title based on selection
+      const typeSelect = document.getElementById("typeSelect")
+      const inputField = document.getElementById("inputField")
+      typeSelect.addEventListener("change", () => {
+        if (typeSelect.value === "url") {
+          inputField.placeholder = "Enter URL"
+          inputField.title =
+            "Enter a valid URL, starting with http:// or https://"
+        } else {
+          inputField.placeholder = "Enter Text"
+          inputField.title = "Enter the text you want to encode as a QR code."
+        }
+      })
+
+      // Get references to the button and image elements
+      const dispmodeBtn = document.getElementById("dispmodeBtn")
+      const dispmodeImage = document.getElementById("dispmodeImage")
+
+      // Define the two image sources
+      const darkModeIcon = "/assets/night-mode.png"
+      const lightModeIcon = "/assets/light-mode.png"
+
+      // Add a click event listener to toggle the image
+      dispmodeBtn.addEventListener("click", () => {
+        // Toggle the image source between light and dark mode icons
+        dispmodeImage.src = dispmodeImage.src.includes(darkModeIcon)
+          ? lightModeIcon
+          : darkModeIcon
+
+        // Optionally toggle a class for dark/light mode on the body
+        document.body.classList.toggle("light-mode")
+      })
+
+      // Add event listener to the generate button
+      document.getElementById("generateBtn").addEventListener("click", () => {
+        const input = inputField.value // Get the input value
+        const type = typeSelect.value // Get the selected type (URL or Text)
+
+        //IF valid URL OR TEXT
+        if (
+          (type === "url" && isValidUrl(input)) ||
+          (type === "text" && input.trim() !== "")
+        ) {
+          // Clear the previous QR code
+          const qrDiv = document.getElementById("qrcode")
+          qrDiv.innerHTML = ""
+
+          // Create a canvas element to hold the QR code
+          const qrCanvas = document.createElement("canvas")
+          qrCanvas.id = "qrCanvas"
+          qrDiv.appendChild(qrCanvas)
+
+          // Generate the QR code
+          QRCode.toCanvas(qrCanvas, input, (error) => {
+            if (error) {
+              console.error(error)
+            } else {
+              console.log("QR Code generated successfully!")
+              const downloadBtn = document.getElementById("downloadBtn")
+              downloadBtn.style.display = "inline" // Show the download button
+              downloadBtn.onclick = () => {
+                const fileName =
+                  type === "url" ? extractDomain(input) : "text_qr_code"
+                const link = document.createElement("a")
+                link.download = `${fileName}.png`
+                link.href = qrCanvas.toDataURL("image/png")
+                link.click()
+              }
+            }
+          })
+        } else {
+          // Determine the specific error
+          if (type === "url" && !isValidUrl(input)) {
+            alert(
+              "Please enter a valid URL. Make sure it starts with http:// or https://"
+            )
+          } else if (type === "text" && input.trim() === "") {
+            alert("Please enter valid characters for the text.")
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
