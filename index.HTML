@@ -14,10 +14,10 @@
 		<title>QR Code Generator</title>
 
 		<!-- Set Favicon image(used for TAB Logo)-->
-		<link rel="icon" type="image/png" href="favicon.png">
+		<link rel="icon" type="image/png" href="/assets/favicon.png">
 
 		<!-- Link to external CSS file(Changes the way the HTML looks) -->
-    	<link rel="stylesheet" href="styles.css">
+    	<link rel="stylesheet" href="/styles.css">
 
 	</head>
 
@@ -45,7 +45,7 @@
 
     	<!-- display mode button -->
     	<button id="dispmodeBtn">
-		    <img id="dispmodeImage" src="night-mode.png" alt="Toggle Display Mode" />
+		    <img id="dispmodeImage" src="/night-mode.png" alt="Toggle Display Mode" />
 		</button>
 
     	<!-- Include the QR Code library -->
@@ -84,8 +84,8 @@
 		    const dispmodeImage = document.getElementById("dispmodeImage");
 
 			// Define the two image sources
-		    const darkModeIcon = "night-mode.png";
-		    const lightModeIcon = "light-mode.png";
+		    const darkModeIcon = "/assets/night-mode.png";
+		    const lightModeIcon = "/assets/light-mode.png";
 
 			// Add a click event listener to toggle the image
 		    dispmodeBtn.addEventListener("click", () => {
